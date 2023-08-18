@@ -1,0 +1,35 @@
+
+{
+  "questionario": {
+    "questionario_id": 1,
+    "tema": "Natureza brasileira",
+    "questoes": [
+      {
+        "questao_id": 1,
+        "titulo": "Florestas brasileiras",
+        "pergunta": "Qual o nome da maior floresta brasileira?",
+        "resposta": 4,
+        "alternativas": [
+          {
+            "id": 1,
+            "titulo": "Caatinga"
+          },
+          {
+            "id": 2,
+            "titulo": "Cerrado"
+          },
+          {
+            "id": 3,
+            "titulo": "Mata Atlântica"
+          },
+          {
+            "id": 4,
+            "titulo": "Amazônica"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
