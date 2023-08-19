@@ -1,10 +1,10 @@
 name: fast_trivia
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
   flutter:
@@ -12,6 +12,8 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   top_snackbar_flutter: ^3.1.0
   http: ^0.13.6
+  asyncstate: ^2.0.2
+  shared_preferences: ^2.0.15
   url_launcher: ^6.1.12
 
 dev_dependencies:
