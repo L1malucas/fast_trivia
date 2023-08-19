@@ -10,6 +10,7 @@ class IntroPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsContants.white,
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: CustomScrollView(
