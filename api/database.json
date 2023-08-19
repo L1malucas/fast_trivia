@@ -1,31 +1,42 @@
 {
   "questionario": [
     {
-      "id": 1,
-      "tema": "Natureza brasileira",
+      "id_tema": 1,
+      "tema": "Natureza Brasileira",
       "questoes": [
         {
-          "id": 1,
-          "titulo": "Florestas brasileiras",
+          "questao_id": 1,
           "pergunta": "Qual o nome da maior floresta brasileira?",
-          "resposta": 4,
+          "resposta": 3,
+          "alternativas": ["Caatinga", "Cerrado", "Mata Atlântica", "Amazônica"]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual é o animal símbolo do Brasil devido a sua imponente beleza e ameaça de extinção?",
+          "resposta": 1,
+          "alternativas": ["Lobo-guará", "Onça-pintada", "Tucano", "Capivara"]
+        }
+      ]
+    },
+    {
+      "id_tema": 2,
+      "tema": "Salvador",
+      "questoes": [
+        {
+          "questao_id": 1,
+          "pergunta": "Qual é a capital do estado da Bahia?",
+          "resposta": 1,
+          "alternativas": ["Recife", "Salvador", "Fortaleza", "Rio de Janeiro"]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual é o famoso mercado em Salvador conhecido por sua variedade de produtos locais e regionais?",
+          "resposta": 3,
           "alternativas": [
-            {
-              "id": 1,
-              "titulo": "Caatinga"
-            },
-            {
-              "id": 2,
-              "titulo": "Cerrado"
-            },
-            {
-              "id": 3,
-              "titulo": "Mata Atlântica"
-            },
-            {
-              "id": 4,
-              "titulo": "Amazônica"
-            }
+            "Mercado Municipal",
+            "Mercado do Porto",
+            "Mercado Central",
+            "Mercado Modelo"
           ]
         }
       ]
