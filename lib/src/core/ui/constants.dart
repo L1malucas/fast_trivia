@@ -13,7 +13,7 @@ sealed class FontsContants {
 }
 
 sealed class LocalHost {
-  static const ip = 'http://localhost:8080';
+  static const ip = 'http://192.168.1.106:8080';
 }
 
 sealed class ImageConstants {
