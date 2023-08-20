@@ -6,6 +6,7 @@ sealed class ColorsContants {
   static const red = Color(0xFFB74333);
   static const blue = Color(0xFF05556b);
   static const brown = Color(0xFF231313);
+  static const grey = Color(0xFF808080);
 }
 
 sealed class FontsContants {

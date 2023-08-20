@@ -1,5 +1,5 @@
 import 'package:fast_trivia/src/core/ui/constants.dart';
-import 'package:fast_trivia/src/features/home/quizz_card.dart';
+import 'package:fast_trivia/src/features/quizz/quizz_card.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/ui/widget/fixed_spacer.dart';
@@ -23,18 +23,17 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
-                onPressed: () {}, icon: const Icon(Icons.history_rounded)),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.admin_panel_settings_rounded)),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                    '/home/userHistory',
+                  );
+                },
+                icon: const Icon(Icons.history_rounded)),
           ),
         ],
       ),
       body: const Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
         child: CustomScrollView(
           slivers: [
             SliverFillRemaining(
@@ -58,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     width: double.infinity,
                     child: Text(
-                      'Escolha um quizz abaixo',
+                      'Escolha um quizz abaixo para iniciar',
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         color: ColorsContants.black,
@@ -69,24 +68,32 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FixedSpacer.vSmallest,
                   QuizzCard(
+                    backgroundColor: ColorsContants.blue,
+                    iconData: Icons.play_arrow_rounded,
                     questionsLenght: 2,
                     themeImage: ImageConstants.historyTheme,
                     themeName: 'História do Brasil',
                   ),
                   FixedSpacer.vSmaller,
                   QuizzCard(
+                    backgroundColor: ColorsContants.brown,
+                    iconData: Icons.check_box,
                     questionsLenght: 2,
                     themeImage: ImageConstants.scienceTheme,
                     themeName: 'Ciências Básicas',
                   ),
                   FixedSpacer.vSmaller,
                   QuizzCard(
+                    backgroundColor: ColorsContants.red,
+                    iconData: Icons.play_arrow_rounded,
                     questionsLenght: 2,
                     themeImage: ImageConstants.natureTheme,
                     themeName: 'Natureza Brasileira',
                   ),
                   FixedSpacer.vSmaller,
                   QuizzCard(
+                    backgroundColor: ColorsContants.blue,
+                    iconData: Icons.check_box,
                     questionsLenght: 2,
                     themeImage: ImageConstants.salvadorTheme,
                     themeName: 'Cidade de Salvador',
