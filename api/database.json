@@ -40,6 +40,47 @@
           ]
         }
       ]
+    },
+    {
+      "id_tema": 3,
+      "tema": "História do Brasil",
+      "questoes": [
+        {
+          "questao_id": 1,
+          "pergunta": "Em que ano o Brasil foi descoberto pelos portugueses?",
+          "resposta": 2,
+          "alternativas": ["1492", "1500", "1521", "1557"]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual imperador assinou a Lei Áurea, abolindo a escravidão no Brasil?",
+          "resposta": 4,
+          "alternativas": [
+            "Dom João VI",
+            "Dom Pedro I",
+            "Dom Pedro II",
+            "Princesa Isabel"
+          ]
+        }
+      ]
+    },
+    {
+      "id_tema": 4,
+      "tema": "Ciências",
+      "questoes": [
+        {
+          "questao_id": 1,
+          "pergunta": "Qual é o planeta mais próximo do Sol?",
+          "resposta": 2,
+          "alternativas": ["Vênus", "Mercúrio", "Marte", "Júpiter"]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual é a unidade básica da vida?",
+          "resposta": 1,
+          "alternativas": ["Célula", "Átomo", "Molécula", "Proteína"]
+        }
+      ]
     }
   ]
 }
