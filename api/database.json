@@ -20,7 +20,7 @@
     },
     {
       "id_tema": 2,
-      "tema": "Salvador",
+      "tema": "Cidade de Salvador",
       "questoes": [
         {
           "questao_id": 1,
@@ -66,7 +66,7 @@
     },
     {
       "id_tema": 4,
-      "tema": "Ciências",
+      "tema": "Ciências Básicas",
       "questoes": [
         {
           "questao_id": 1,
