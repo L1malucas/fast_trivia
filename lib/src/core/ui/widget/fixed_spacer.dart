@@ -33,4 +33,5 @@ class FixedSpacer {
 
   /// Width: 16
   static const SizedBox hNormal = SizedBox(height: null, width: 16);
+  static const SizedBox hBigger = SizedBox(height: null, width: 48);
 }
