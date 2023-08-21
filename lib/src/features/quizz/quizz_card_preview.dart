@@ -1,4 +1,5 @@
 import 'package:fast_trivia/src/core/ui/widget/alert.dart';
+import 'package:fast_trivia/src/models/quiz_model.dart';
 import 'package:flutter/material.dart';
 import '../../core/ui/constants.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
@@ -6,22 +7,19 @@ import '../../core/ui/widget/fixed_spacer.dart';
 class QuizzCardPreview extends StatelessWidget {
   const QuizzCardPreview({
     Key? key,
-    required this.questionsLenght,
-    required this.themeName,
     required this.themeImage,
     this.iconData,
     this.backgroundColor,
     this.rightAnswers,
+    required this.quizzModel,
   }) : super(key: key);
 
-  final int questionsLenght;
-  final String themeName;
+  final QuizzModel quizzModel;
+
   final String themeImage;
   final IconData? iconData;
   final Color? backgroundColor;
   final int? rightAnswers;
-
-  // adicionar um setstate para buscar os dados do shared
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +58,7 @@ class QuizzCardPreview extends StatelessWidget {
                   width: 160,
                   height: 64,
                   child: Text(
-                    themeName,
+                    quizzModel.tema,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -72,7 +70,7 @@ class QuizzCardPreview extends StatelessWidget {
                 ),
                 FixedSpacer.vSmaller,
                 Text(
-                  '$questionsLenght Questões',
+                  '${quizzModel.questoes.length} Questões',
                   style: const TextStyle(
                     color: ColorsContants.white,
                     fontSize: 16,
@@ -82,7 +80,7 @@ class QuizzCardPreview extends StatelessWidget {
                 Visibility(
                   visible: rightAnswers != null,
                   child: Text(
-                    '$questionsLenght Acertos',
+                    '${quizzModel.questoes.length} Acertos',
                     style: const TextStyle(
                       color: ColorsContants.white,
                       fontSize: 14,

@@ -26,10 +26,11 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void requestList() async {
-    setState(() async {
-      questionarios = await StorageProvider.getQuizzFromSharedPreferences();
-      print(questionarios);
+  Future<void> requestList() async {
+    List<QuizzModel> quizzList =
+        await StorageProvider.getQuizzFromSharedPreferences();
+    setState(() {
+      questionarios = quizzList;
     });
   }
 
@@ -92,35 +93,31 @@ class _HomePageState extends State<HomePage> {
                     ),
                     FixedSpacer.vSmallest,
                     QuizzCardPreview(
+                      quizzModel: questionarios[0],
                       backgroundColor: ColorsContants.blue,
                       iconData: Icons.play_arrow_rounded,
-                      questionsLenght: 2,
-                      themeImage: ImageConstants.historyTheme,
-                      themeName: questionarios[2].tema,
+                      themeImage: ImageConstants.natureTheme,
                     ),
                     FixedSpacer.vSmaller,
                     QuizzCardPreview(
+                      quizzModel: questionarios[1],
                       backgroundColor: ColorsContants.brown,
-                      iconData: Icons.check_box,
-                      questionsLenght: questionarios[0].questoes.length,
-                      themeImage: ImageConstants.scienceTheme,
-                      themeName: 'Ciências Básicas',
+                      iconData: Icons.check_rounded,
+                      themeImage: ImageConstants.salvadorTheme,
                     ),
                     FixedSpacer.vSmaller,
                     QuizzCardPreview(
+                      quizzModel: questionarios[2],
                       backgroundColor: ColorsContants.red,
                       iconData: Icons.play_arrow_rounded,
-                      questionsLenght: 2,
-                      themeImage: ImageConstants.natureTheme,
-                      themeName: questionarios[0].tema,
+                      themeImage: ImageConstants.historyTheme,
                     ),
                     FixedSpacer.vSmaller,
-                    const QuizzCardPreview(
+                    QuizzCardPreview(
+                      quizzModel: questionarios[3],
                       backgroundColor: ColorsContants.blue,
-                      iconData: Icons.check_box,
-                      questionsLenght: 2,
-                      themeImage: ImageConstants.salvadorTheme,
-                      themeName: 'Cidade de Salvador',
+                      iconData: Icons.check_rounded,
+                      themeImage: ImageConstants.scienceTheme,
                     ),
                   ],
                 ),
