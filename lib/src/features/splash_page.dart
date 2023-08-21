@@ -19,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
   double get _logoAnimationWidth => 100 * _scale;
   double get _logoAnimationHeight => 120 * _scale;
 
-  List<Questionario> questionarios = [];
+  List<QuizzModel> questionarios = [];
 
   @override
   void initState() {
@@ -35,8 +35,7 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> _fetchAndSaveQuizData() async {
     try {
-      final List<Questionario> fetchedQuestionarios =
-          await RestClient.getQuizz();
+      final List<QuizzModel> fetchedQuestionarios = await RestClient.getQuizz();
       await StorageProvider.saveQuizzToSharedPreferences(fetchedQuestionarios);
       setState(() {
         questionarios = fetchedQuestionarios;

@@ -4,19 +4,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageProvider {
   static Future<void> saveQuizzToSharedPreferences(
-      List<Questionario> questionarios) async {
+      List<QuizzModel> questionarios) async {
     final prefs = await SharedPreferences.getInstance();
     final jsonData = questionarios.map((q) => q.toJson()).toList();
     await prefs.setString('questionarios', jsonEncode(jsonData));
   }
 
-  static Future<List<Questionario>> getQuizzFromSharedPreferences() async {
+  static Future<List<QuizzModel>> getQuizzFromSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
     final jsonData = prefs.getString('questionarios');
     if (jsonData != null) {
       final List<dynamic> decodedData = jsonDecode(jsonData);
-      final List<Questionario> questionarios =
-          decodedData.map((json) => Questionario.fromJson(json)).toList();
+      final List<QuizzModel> questionarios =
+          decodedData.map((json) => QuizzModel.fromJson(json)).toList();
       return questionarios;
     } else {
       return [];
