@@ -1,4 +1,6 @@
+import 'package:fast_trivia/src/core/providers/storage_provider.dart';
 import 'package:fast_trivia/src/core/ui/constants.dart';
+import 'package:fast_trivia/src/models/quiz_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,6 +15,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<QuizzModel> questionarios = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      requestList();
+    });
+  }
+
+  void requestList() async {
+    setState(() async {
+      questionarios = await StorageProvider.getQuizzFromSharedPreferences();
+      print(questionarios);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -36,8 +56,8 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: const Padding(
-          padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
+        body: Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
           child: CustomScrollView(
             slivers: [
               SliverFillRemaining(
@@ -46,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       width: double.infinity,
                       child: Text(
                         'Vamos Jogar',
@@ -58,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: double.infinity,
                       child: Text(
                         'Escolha um quizz abaixo para iniciar',
@@ -76,13 +96,13 @@ class _HomePageState extends State<HomePage> {
                       iconData: Icons.play_arrow_rounded,
                       questionsLenght: 2,
                       themeImage: ImageConstants.historyTheme,
-                      themeName: 'História do Brasil',
+                      themeName: questionarios[2].tema,
                     ),
                     FixedSpacer.vSmaller,
                     QuizzCardPreview(
                       backgroundColor: ColorsContants.brown,
                       iconData: Icons.check_box,
-                      questionsLenght: 2,
+                      questionsLenght: questionarios[0].questoes.length,
                       themeImage: ImageConstants.scienceTheme,
                       themeName: 'Ciências Básicas',
                     ),
@@ -92,10 +112,10 @@ class _HomePageState extends State<HomePage> {
                       iconData: Icons.play_arrow_rounded,
                       questionsLenght: 2,
                       themeImage: ImageConstants.natureTheme,
-                      themeName: 'Natureza Brasileira',
+                      themeName: questionarios[0].tema,
                     ),
                     FixedSpacer.vSmaller,
-                    QuizzCardPreview(
+                    const QuizzCardPreview(
                       backgroundColor: ColorsContants.blue,
                       iconData: Icons.check_box,
                       questionsLenght: 2,

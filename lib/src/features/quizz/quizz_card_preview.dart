@@ -21,6 +21,8 @@ class QuizzCardPreview extends StatelessWidget {
   final Color? backgroundColor;
   final int? rightAnswers;
 
+  // adicionar um setstate para buscar os dados do shared
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
