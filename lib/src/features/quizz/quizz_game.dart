@@ -3,6 +3,7 @@ import 'package:fast_trivia/src/core/ui/constants.dart';
 import 'package:fast_trivia/src/core/ui/helpers/messages_helpers.dart';
 import 'package:fast_trivia/src/core/ui/widget/alert.dart';
 import 'package:fast_trivia/src/core/ui/widget/fixed_spacer.dart';
+import 'package:fast_trivia/src/features/home/home_page.dart';
 import 'package:fast_trivia/src/features/quizz/quizz_text.dart';
 import 'package:flutter/material.dart';
 
@@ -23,8 +24,13 @@ class _QuizzGameState extends State<QuizzGame> {
 
   void _showExitAlert(BuildContext context) {
     Alert(
-            onConfirmPressed: () {
-              Navigator.pop(context);
+            onConfirmPressed: () async {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const HomePage()),
+                (route) => false,
+              );
+              return false;
             },
             onCancelPressed: () {},
             title: 'Sair do quizz',
@@ -125,6 +131,8 @@ class _QuizzGameState extends State<QuizzGame> {
                           setState(() {
                             selected = !selected;
                             print(selected);
+                            Navigator.of(context)
+                                .pushNamed('/quizz/quizz_finish');
                           });
                         },
                         child: Text(

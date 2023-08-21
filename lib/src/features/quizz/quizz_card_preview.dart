@@ -29,7 +29,7 @@ class QuizzCardPreview extends StatelessWidget {
           title: 'Iniciar o quizz?',
           message: 'A contagem irá iniciar automaticamente ao clicar em sim',
           onConfirmPressed: () {
-            Navigator.of(context).pushNamed('/quizz/quizz_game');
+            Navigator.of(context).pushReplacementNamed('/quizz/quizz_game');
           },
         ).show();
       },
