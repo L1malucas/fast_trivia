@@ -6,8 +6,8 @@ sealed class MessagesHelper {
   static void showError(String message, BuildContext context) {
     showTopSnackBar(
         snackBarPosition: SnackBarPosition.bottom,
-        displayDuration: const Duration(seconds: 1),
-        animationDuration: const Duration(seconds: 1),
+        displayDuration: const Duration(milliseconds: 500),
+        animationDuration: const Duration(milliseconds: 500),
         Overlay.of(context),
         CustomSnackBar.error(message: message));
   }
@@ -15,8 +15,8 @@ sealed class MessagesHelper {
   static void showInfor(String message, BuildContext context) {
     showTopSnackBar(
         snackBarPosition: SnackBarPosition.bottom,
-        displayDuration: const Duration(seconds: 1),
-        animationDuration: const Duration(seconds: 1),
+        displayDuration: const Duration(milliseconds: 500),
+        animationDuration: const Duration(milliseconds: 500),
         Overlay.of(context),
         CustomSnackBar.info(message: message));
   }
@@ -24,8 +24,8 @@ sealed class MessagesHelper {
   static void showSuccess(String message, BuildContext context) {
     showTopSnackBar(
         snackBarPosition: SnackBarPosition.bottom,
-        displayDuration: const Duration(seconds: 1),
-        animationDuration: const Duration(seconds: 1),
+        displayDuration: const Duration(milliseconds: 500),
+        animationDuration: const Duration(milliseconds: 500),
         Overlay.of(context),
         CustomSnackBar.success(message: message));
   }

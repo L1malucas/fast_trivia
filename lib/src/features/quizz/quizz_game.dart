@@ -1,6 +1,6 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fast_trivia/src/core/ui/constants.dart';
-import 'package:fast_trivia/src/core/ui/helpers/messages_helpers.dart';
+import 'package:fast_trivia/src/core/ui/widget/messages_helpers.dart';
 import 'package:fast_trivia/src/core/ui/widget/alert.dart';
 import 'package:fast_trivia/src/core/ui/widget/fixed_spacer.dart';
 import 'package:fast_trivia/src/features/home/home_page.dart';
