@@ -3,6 +3,7 @@ import 'package:fast_trivia/src/core/ui/widget/custom_loader.dart';
 import 'package:fast_trivia/src/features/home/home_page.dart';
 import 'package:fast_trivia/src/features/home/user_history.dart';
 import 'package:fast_trivia/src/features/intro/intro_page.dart';
+import 'package:fast_trivia/src/features/quizz/quizz_game.dart';
 import 'package:flutter/material.dart';
 
 import 'core/ui/fast_trivia_theme.dart';
@@ -25,6 +26,7 @@ class FastTriviaApp extends StatelessWidget {
             '/intro': (_) => const IntroPage(),
             '/home/home': (_) => const HomePage(),
             '/home/userHistory': (_) => const UserHistory(),
+            '/quizz/quizz_game': (_) => const QuizzGame()
           },
         );
       },

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../../core/ui/constants.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
 
-class QuizzCard extends StatelessWidget {
-  const QuizzCard({
+class QuizzCardPreview extends StatelessWidget {
+  const QuizzCardPreview({
     Key? key,
     required this.questionsLenght,
     required this.themeName,
@@ -22,7 +22,7 @@ class QuizzCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('object');
+        Navigator.of(context).pushNamed('/quizz/quizz_game');
       },
       child: Container(
         padding: const EdgeInsets.all(24.0),
