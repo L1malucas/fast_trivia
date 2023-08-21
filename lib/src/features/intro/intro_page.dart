@@ -1,4 +1,5 @@
 import 'package:fast_trivia/src/core/ui/widget/fixed_spacer.dart';
+import 'package:fast_trivia/src/features/intro/intro_text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,6 +24,7 @@ class IntroPage extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      IntroText.firstText,
                       FixedSpacer.vSmall,
                       Align(
                         alignment: Alignment.center,
