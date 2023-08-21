@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/ui/constants.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
-import '../quizz/quizz_card.dart';
+import '../quizz/quizz_card_preview.dart';
 
 class UserHistory extends StatefulWidget {
   const UserHistory({super.key});
@@ -15,9 +15,7 @@ class _UserHistoryState extends State<UserHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: ColorsContants.white,
-      ),
+      appBar: AppBar(),
       backgroundColor: ColorsContants.white,
       body: const Padding(
         padding: EdgeInsets.all(16.0),
@@ -49,7 +47,7 @@ class _UserHistoryState extends State<UserHistory> {
                 ),
               ),
               FixedSpacer.vSmallest,
-              QuizzCard(
+              QuizzCardPreview(
                 iconData: Icons.check_box,
                 backgroundColor: ColorsContants.grey,
                 questionsLenght: 2,
@@ -57,7 +55,7 @@ class _UserHistoryState extends State<UserHistory> {
                 themeName: 'História do Brasil',
               ),
               FixedSpacer.vSmaller,
-              QuizzCard(
+              QuizzCardPreview(
                 iconData: Icons.check_box,
                 backgroundColor: ColorsContants.grey,
                 questionsLenght: 2,

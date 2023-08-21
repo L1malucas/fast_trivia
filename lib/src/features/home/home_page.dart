@@ -1,5 +1,5 @@
 import 'package:fast_trivia/src/core/ui/constants.dart';
-import 'package:fast_trivia/src/features/quizz/quizz_card.dart';
+import 'package:fast_trivia/src/features/quizz/quizz_card_preview.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/ui/widget/fixed_spacer.dart';
@@ -15,9 +15,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsContants.white,
       appBar: AppBar(
-        backgroundColor: ColorsContants.white,
         automaticallyImplyLeading: false,
         actions: [
           Padding(
@@ -67,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   FixedSpacer.vSmallest,
-                  QuizzCard(
+                  QuizzCardPreview(
                     backgroundColor: ColorsContants.blue,
                     iconData: Icons.play_arrow_rounded,
                     questionsLenght: 2,
@@ -75,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                     themeName: 'História do Brasil',
                   ),
                   FixedSpacer.vSmaller,
-                  QuizzCard(
+                  QuizzCardPreview(
                     backgroundColor: ColorsContants.brown,
                     iconData: Icons.check_box,
                     questionsLenght: 2,
@@ -83,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                     themeName: 'Ciências Básicas',
                   ),
                   FixedSpacer.vSmaller,
-                  QuizzCard(
+                  QuizzCardPreview(
                     backgroundColor: ColorsContants.red,
                     iconData: Icons.play_arrow_rounded,
                     questionsLenght: 2,
@@ -91,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                     themeName: 'Natureza Brasileira',
                   ),
                   FixedSpacer.vSmaller,
-                  QuizzCard(
+                  QuizzCardPreview(
                     backgroundColor: ColorsContants.blue,
                     iconData: Icons.check_box,
                     questionsLenght: 2,
