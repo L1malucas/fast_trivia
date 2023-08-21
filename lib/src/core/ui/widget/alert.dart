@@ -45,22 +45,29 @@ class Alert {
                 : null)),
         content: Text(message, textAlign: TextAlign.center),
         actions: <Widget>[
-          _buildButton(
-              name: type.confirmButton,
-              onPressed: () {
-                Navigator.of(context).pop();
-                if (onConfirmPressed != null) {
-                  onConfirmPressed!();
-                }
-              }),
-          _buildButton(
-              name: type.cancelButton,
-              onPressed: () {
-                Navigator.of(context).pop();
-                if (onCancelPressed != null) {
-                  onCancelPressed!();
-                }
-              })
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildButton(
+                    name: type.confirmButton,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      if (onConfirmPressed != null) {
+                        onConfirmPressed!();
+                      }
+                    }),
+                _buildButton(
+                    name: type.cancelButton,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      if (onCancelPressed != null) {
+                        onCancelPressed!();
+                      }
+                    })
+              ],
+            ),
+          )
         ],
       ),
     );

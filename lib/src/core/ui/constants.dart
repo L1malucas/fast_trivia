@@ -7,6 +7,8 @@ sealed class ColorsContants {
   static const blue = Color(0xFF05556b);
   static const brown = Color(0xFF231313);
   static const grey = Color(0xFF808080);
+  static const green = Color(0xFFd0c904);
+  static const quizzBackground = Color(0xFF4383f1);
 }
 
 sealed class FontsContants {
