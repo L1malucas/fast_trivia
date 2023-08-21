@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/ui/constants.dart';
 import '../../core/ui/widget/alert.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
+import 'quizz_text.dart';
 
 class QuizzFinish extends StatefulWidget {
   const QuizzFinish({super.key});
@@ -43,7 +44,6 @@ class _QuizzFinishState extends State<QuizzFinish> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FixedSpacer.vNormal,
-              // countdown e saída do quizz
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -68,18 +68,17 @@ class _QuizzFinishState extends State<QuizzFinish> {
                 ],
               ),
               // imagem do tema
-              FixedSpacer.vSmall,
+              FixedSpacer.vBiggest,
               SizedBox(
                 width: double.infinity,
                 height: 180,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      12.0), // Adjust the radius as needed
+                  borderRadius: BorderRadius.circular(12.0),
                   child: const DecoratedBox(
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
-                          ImageConstants.backgroundImage,
+                          ImageConstants.congratsImage,
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -87,8 +86,20 @@ class _QuizzFinishState extends State<QuizzFinish> {
                   ),
                 ),
               ),
-              // contagem das questões
-              FixedSpacer.vSmall,
+              FixedSpacer.vBiggest,
+              const QuizzText(
+                text: "Você acertou 2 de 10!!",
+                size: 32,
+                fontWeight: FontWeight.w500,
+              ),
+              FixedSpacer.vBiggest,
+              const QuizzText(
+                maxLines: 10,
+                text:
+                    "Confira o gabarito acessando o histórico\nou\nVolte para o ínicio e tente outros quizz",
+                size: 28,
+                fontWeight: FontWeight.w500,
+              ),
             ],
           ),
         ),

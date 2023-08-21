@@ -21,12 +21,12 @@ sealed class LocalHost {
 
 sealed class ImageConstants {
   static const backgroundImage = 'assets/images/backgroung.jpg';
- 
   static const historyTheme = 'assets/images/historyTheme.jpg';
   static const natureTheme = 'assets/images/natureTheme.jpg';
   static const salvadorTheme = 'assets/images/salvadorTheme.jpg';
   static const scienceTheme = 'assets/images/scienceTheme.jpg';
-
+  static const congratsImage = 'assets/images/congratsImage.jpg';
+  static const gameOverImage = 'assets/images/gameOverImage.jpg';
 }
 
 sealed class LinksConstants {

@@ -9,7 +9,7 @@ class QuizzText extends StatelessWidget {
     required this.size,
     this.width,
     this.fontWeight,
-    this.textAlign,
+    this.textAlign, this.maxLines,
   });
 
   final String text;
@@ -17,13 +17,14 @@ class QuizzText extends StatelessWidget {
   final double? width;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
+  final int? maxLines;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? double.infinity,
       child: Text(
-        maxLines: 3,
+        maxLines: maxLines ?? 3,
         text,
         textAlign: textAlign ?? TextAlign.center,
         style: TextStyle(
