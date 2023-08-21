@@ -63,7 +63,7 @@ class _UserHistoryState extends State<UserHistory> {
                 ),
                 FixedSpacer.vSmallest,
                 QuizzCardPreview(
-                  iconData: Icons.check_box,
+                  rightAnswers: 1,
                   backgroundColor: ColorsContants.grey,
                   questionsLenght: 2,
                   themeImage: ImageConstants.historyTheme,
@@ -71,7 +71,7 @@ class _UserHistoryState extends State<UserHistory> {
                 ),
                 FixedSpacer.vSmaller,
                 QuizzCardPreview(
-                  iconData: Icons.check_box,
+                  rightAnswers: 0,
                   backgroundColor: ColorsContants.grey,
                   questionsLenght: 2,
                   themeImage: ImageConstants.scienceTheme,

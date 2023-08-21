@@ -9,7 +9,9 @@ class QuizzText extends StatelessWidget {
     required this.size,
     this.width,
     this.fontWeight,
-    this.textAlign, this.maxLines,
+    this.textAlign,
+    this.maxLines,
+    this.color,
   });
 
   final String text;
@@ -18,6 +20,7 @@ class QuizzText extends StatelessWidget {
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
   final int? maxLines;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class QuizzText extends StatelessWidget {
         text,
         textAlign: textAlign ?? TextAlign.center,
         style: TextStyle(
-          color: ColorsContants.white,
+          color: color ?? ColorsContants.white,
           fontWeight: fontWeight,
           fontSize: size,
         ),

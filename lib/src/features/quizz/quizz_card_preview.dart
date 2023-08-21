@@ -9,29 +9,35 @@ class QuizzCardPreview extends StatelessWidget {
     required this.questionsLenght,
     required this.themeName,
     required this.themeImage,
-    required this.iconData,
+    this.iconData,
     this.backgroundColor,
+    this.rightAnswers,
   }) : super(key: key);
 
   final int questionsLenght;
   final String themeName;
   final String themeImage;
-  final IconData iconData;
+  final IconData? iconData;
   final Color? backgroundColor;
+  final int? rightAnswers;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        Alert(
-          context: context,
-          type: AlertType.yesNo,
-          title: 'Iniciar o quizz?',
-          message: 'A contagem irá iniciar automaticamente ao clicar em sim',
-          onConfirmPressed: () {
-            Navigator.of(context).pushReplacementNamed('/quizz/quizz_game');
-          },
-        ).show();
+        if (rightAnswers != null) {
+          Navigator.of(context).pushReplacementNamed('/quizz/quizz_feedback');
+        } else {
+          Alert(
+            context: context,
+            type: AlertType.yesNo,
+            title: 'Iniciar o quizz?',
+            message: 'A contagem irá iniciar automaticamente ao clicar em sim',
+            onConfirmPressed: () {
+              Navigator.of(context).pushReplacementNamed('/quizz/quizz_game');
+            },
+          ).show();
+        }
       },
       child: Container(
         padding: const EdgeInsets.all(24.0),
@@ -70,8 +76,17 @@ class QuizzCardPreview extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                // mudar icone para play ou check
-                FixedSpacer.vSmaller,
+                FixedSpacer.vSmallest,
+                Visibility(
+                  visible: rightAnswers != null,
+                  child: Text(
+                    '$questionsLenght Acertos',
+                    style: const TextStyle(
+                      color: ColorsContants.white,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
                 Icon(
                   size: 15,
                   iconData,
