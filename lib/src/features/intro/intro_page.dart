@@ -24,22 +24,34 @@ class IntroPage extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IntroText.firstText,
+                      FixedSpacer.vBiggest,
+                      const Expanded(child: IntroText.firstText),
                       FixedSpacer.vSmall,
                       Align(
                         alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.of(context).pushNamed(
-                              '/home/home',
-                            );
-                          },
-                          child: const Text(
-                            "Avançar",
-                            style: TextStyle(
-                                color: ColorsContants.brown,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 16),
+                        child: SizedBox(
+                          height: 36,
+                          width: 92,
+                          child: Card(
+                            color: ColorsContants.blue,
+                            elevation: 2,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                  '/home/home',
+                                );
+                              },
+                              child: const Center(
+                                child: Text(
+                                  "Avançar",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: ColorsContants.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16),
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                       ),
