@@ -1,10 +1,9 @@
 import 'package:fast_trivia/src/core/exceptions/request_exceptions.dart';
+import 'package:fast_trivia/src/core/providers/storage_provider.dart';
 import 'package:fast_trivia/src/core/ui/constants.dart';
 import 'package:fast_trivia/src/models/quiz_model.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
-import '../singleton/quizz_singleton.dart';
 
 class RestClient {
   static const baseUrl = '${LocalHost.ip}/questionario';
@@ -17,7 +16,9 @@ class RestClient {
         final List<dynamic> jsonData = jsonDecode(response.body);
         final List<Questionario> questionarios =
             jsonData.map((json) => Questionario.fromJson(json)).toList();
-        return questionarioSingleton.questionarios = questionarios;
+        await StorageProvider.saveQuizzToSharedPreferences(questionarios);
+
+        return questionarios;
       } else {
         throw RequestExceptions(
           message: 'Falha na request GetAll',

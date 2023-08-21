@@ -9,6 +9,12 @@ class Questionario {
 
     return Questionario(temas: temas);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'questionario': temas.map((tema) => tema.toJson()).toList(),
+    };
+  }
 }
 
 class Tema {
@@ -19,14 +25,20 @@ class Tema {
   Tema({required this.idTema, required this.tema, required this.questoes});
 
   factory Tema.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'id_tema': final int idTema,
-        'tema': final String tema,
-        'questoes': final List<Questao> questoes
-      } =>
-        Tema(idTema: idTema, tema: tema, questoes: questoes),
-      _ => throw ArgumentError('Json inválido')
+    return Tema(
+      idTema: json['id_tema'],
+      tema: json['tema'],
+      questoes: (json['questoes'] as List<dynamic>)
+          .map((questaoJson) => Questao.fromJson(questaoJson))
+          .toList(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id_tema': idTema,
+      'tema': tema,
+      'questoes': questoes.map((questao) => questao.toJson()).toList(),
     };
   }
 }
@@ -45,18 +57,20 @@ class Questao {
   });
 
   factory Questao.fromJson(Map<String, dynamic> json) {
-    return switch (json) {
-      {
-        'questao+id': final int questaoId,
-        'pergunta': final String pergunta,
-        'resposta': final int resposta,
-      } =>
-        Questao(
-            questaoId: questaoId,
-            pergunta: pergunta,
-            resposta: resposta,
-            alternativas: json['alternativas'].cast<String>()),
-      _ => throw ArgumentError('Json inválido')
+    return Questao(
+      questaoId: json['questao_id'],
+      pergunta: json['pergunta'],
+      resposta: json['resposta'],
+      alternativas: (json['alternativas'] as List<dynamic>).cast<String>(),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'questao_id': questaoId,
+      'pergunta': pergunta,
+      'resposta': resposta,
+      'alternativas': alternativas,
     };
   }
 }
