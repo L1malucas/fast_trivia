@@ -14,6 +14,8 @@ class QuizzGame extends StatefulWidget {
 }
 
 class _QuizzGameState extends State<QuizzGame> {
+  bool selected = false;
+
   Future<bool> _onWillPop() async {
     _showExitAlert(context);
     return false;
@@ -60,12 +62,11 @@ class _QuizzGameState extends State<QuizzGame> {
                     ),
                   ),
                   CircularCountDownTimer(
-                    autoStart: false,
                     width: 38,
                     height: 38,
                     textStyle: const TextStyle(
                         color: ColorsContants.white, fontSize: 18),
-                    duration: 5,
+                    duration: 7,
                     fillColor: ColorsContants.red,
                     ringColor: ColorsContants.white,
                     onComplete: () {
@@ -117,13 +118,27 @@ class _QuizzGameState extends State<QuizzGame> {
                     return Card(
                       elevation: 4,
                       // tudo branco, vira verde quando clickado
-                      color: ColorsContants.white,
+                      color:
+                          selected ? ColorsContants.blue : ColorsContants.white,
                       child: InkWell(
-                        onTap: () {},
-                        child: const QuizzText(
+                        onTap: () {
+                          setState(() {
+                            selected = !selected;
+                            print(selected);
+                          });
+                        },
+                        child: Text(
+                          "Qual o nome da maior floresta brasileira?",
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: selected
+                                ? ColorsContants.white
+                                : ColorsContants.brown,
                             fontWeight: FontWeight.w600,
-                            text: "Qual o nome da maior floresta brasileira?",
-                            size: 22),
+                            fontSize: 22,
+                          ),
+                        ),
                       ),
                     );
                   },

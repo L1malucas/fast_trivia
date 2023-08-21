@@ -1,3 +1,4 @@
+import 'package:fast_trivia/src/core/ui/widget/alert.dart';
 import 'package:flutter/material.dart';
 import '../../core/ui/constants.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
@@ -21,8 +22,16 @@ class QuizzCardPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Navigator.of(context).pushNamed('/quizz/quizz_game');
+      onTap: () async {
+        Alert(
+          context: context,
+          type: AlertType.yesNo,
+          title: 'Iniciar o quizz?',
+          message: 'A contagem irá iniciar automaticamente ao clicar em sim',
+          onConfirmPressed: () {
+            Navigator.of(context).pushNamed('/quizz/quizz_game');
+          },
+        ).show();
       },
       child: Container(
         padding: const EdgeInsets.all(24.0),
