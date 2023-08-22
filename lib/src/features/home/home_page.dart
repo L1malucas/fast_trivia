@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async {
         await StorageProvider.clearQuizzDataFromSharedPreferences();
+        await StorageProvider.clearUserResponsesDataFromSharedPreferences();
         SystemNavigator.pop();
         return false;
       },
