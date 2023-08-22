@@ -5,16 +5,16 @@
       "tema": "Natureza Brasileira",
       "questoes": [
         {
-          "questao_id": 1,
+          "questao_id": 0,
           "pergunta": "Qual o nome da maior floresta brasileira?",
           "resposta": 3,
           "alternativas": ["Caatinga", "Cerrado", "Mata Atlântica", "Amazônica"]
         },
         {
-          "questao_id": 2,
+          "questao_id": 1,
           "pergunta": "Qual é o animal símbolo do Brasil devido a sua imponente beleza e ameaça de extinção?",
           "resposta": 1,
-          "alternativas": ["Lobo-guará", "Onça-pintada", "Tucano", "Capivara"]
+          "alternativas": ["Lobo-guará", "Onça-pintada", "Capivara", "Tucano"]
         }
       ]
     },
@@ -23,20 +23,20 @@
       "tema": "Cidade de Salvador",
       "questoes": [
         {
-          "questao_id": 1,
+          "questao_id": 0,
           "pergunta": "Qual é a capital do estado da Bahia?",
           "resposta": 1,
           "alternativas": ["Recife", "Salvador", "Fortaleza", "Rio de Janeiro"]
         },
         {
-          "questao_id": 2,
+          "questao_id": 1,
           "pergunta": "Qual é o famoso mercado em Salvador conhecido por sua variedade de produtos locais e regionais?",
           "resposta": 3,
           "alternativas": [
+            "Mercado Modelo",
             "Mercado Municipal",
             "Mercado do Porto",
-            "Mercado Central",
-            "Mercado Modelo"
+            "Mercado Central"
           ]
         }
       ]
@@ -46,20 +46,20 @@
       "tema": "História do Brasil",
       "questoes": [
         {
-          "questao_id": 1,
+          "questao_id": 0,
           "pergunta": "Em que ano o Brasil foi descoberto pelos portugueses?",
           "resposta": 2,
           "alternativas": ["1492", "1500", "1521", "1557"]
         },
         {
-          "questao_id": 2,
+          "questao_id": 1,
           "pergunta": "Qual imperador assinou a Lei Áurea, abolindo a escravidão no Brasil?",
           "resposta": 4,
           "alternativas": [
             "Dom João VI",
+            "Princesa Isabel",
             "Dom Pedro I",
-            "Dom Pedro II",
-            "Princesa Isabel"
+            "Dom Pedro II"
           ]
         }
       ]
@@ -69,13 +69,13 @@
       "tema": "Ciências Básicas",
       "questoes": [
         {
-          "questao_id": 1,
+          "questao_id": 0,
           "pergunta": "Qual é o planeta mais próximo do Sol?",
           "resposta": 2,
           "alternativas": ["Vênus", "Mercúrio", "Marte", "Júpiter"]
         },
         {
-          "questao_id": 2,
+          "questao_id": 1,
           "pergunta": "Qual é a unidade básica da vida?",
           "resposta": 1,
           "alternativas": ["Célula", "Átomo", "Molécula", "Proteína"]
