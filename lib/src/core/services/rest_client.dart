@@ -11,7 +11,12 @@ class RestClient {
 
   static Future<List<QuizzModel>> getQuizz() async {
     try {
-      final response = await http.get(Uri.parse(baseUrl));
+      final response = await http.get(Uri.parse(baseUrl)).timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw RequestExceptions(message: 'TimeOut');
+        },
+      );
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = jsonDecode(response.body);
@@ -19,7 +24,7 @@ class RestClient {
         List<QuizzModel> questionarios = parseQuizzList(jsonData);
 
         await StorageProvider.saveQuizzToSharedPreferences(questionarios);
-       
+
         return questionarios;
       } else {
         throw RequestExceptions(
