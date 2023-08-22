@@ -1,4 +1,5 @@
 import 'package:fast_trivia/src/core/ui/widget/alert.dart';
+import 'package:fast_trivia/src/features/quizz/quizz_feedback.dart';
 import 'package:fast_trivia/src/models/quiz_model.dart';
 import 'package:flutter/material.dart';
 import '../../core/ui/constants.dart';
@@ -15,7 +16,6 @@ class QuizzCardPreview extends StatelessWidget {
   }) : super(key: key);
 
   final QuizzModel quizzModel;
-
   final String themeImage;
   final IconData iconData;
   final Color? backgroundColor;
@@ -26,7 +26,13 @@ class QuizzCardPreview extends StatelessWidget {
     return InkWell(
       onTap: () async {
         if (rightAnswers != null) {
-          Navigator.of(context).pushReplacementNamed('/quizz/quizz_feedback');
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => QuizzFeedback(
+                      quizzModel: quizzModel,
+                    ),),
+          );
         } else {
           Alert(
             context: context,
@@ -72,7 +78,7 @@ class QuizzCardPreview extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '${quizzModel.questoes.length} Questões /',
+                      '${quizzModel.questoes.length} Questões',
                       style: const TextStyle(
                         color: ColorsContants.white,
                         fontSize: 16,
@@ -81,7 +87,7 @@ class QuizzCardPreview extends StatelessWidget {
                     Visibility(
                       visible: rightAnswers != null,
                       child: Text(
-                        ' ${quizzModel.questoes.length} Acertos',
+                        ' / ${quizzModel.questoes.length} Acertos',
                         style: const TextStyle(
                           color: ColorsContants.white,
                           fontSize: 14,
