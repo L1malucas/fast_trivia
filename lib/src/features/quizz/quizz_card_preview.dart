@@ -1,5 +1,6 @@
 import 'package:fast_trivia/src/core/ui/widget/alert.dart';
 import 'package:fast_trivia/src/features/quizz/quizz_feedback.dart';
+import 'package:fast_trivia/src/features/quizz/quizz_game.dart';
 import 'package:fast_trivia/src/models/quiz_model.dart';
 import 'package:flutter/material.dart';
 import '../../core/ui/constants.dart';
@@ -29,9 +30,10 @@ class QuizzCardPreview extends StatelessWidget {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => QuizzFeedback(
-                      quizzModel: quizzModel,
-                    ),),
+              builder: (context) => QuizzFeedback(
+                quizzModel: quizzModel,
+              ),
+            ),
           );
         } else {
           Alert(
@@ -40,7 +42,15 @@ class QuizzCardPreview extends StatelessWidget {
             title: 'Iniciar o quizz?',
             message: 'A contagem irá iniciar automaticamente ao clicar em sim',
             onConfirmPressed: () {
-              Navigator.of(context).pushReplacementNamed('/quizz/quizz_game');
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => QuizzGame(
+                    themeImage: themeImage,
+                    quizzModel: quizzModel,
+                  ),
+                ),
+              );
             },
           ).show();
         }
