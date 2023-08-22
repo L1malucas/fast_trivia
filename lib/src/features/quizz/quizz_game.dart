@@ -8,6 +8,7 @@ import 'package:fast_trivia/src/features/home/home_page.dart';
 import 'package:fast_trivia/src/features/quizz/quizz_text.dart';
 
 import '../../models/quiz_model.dart';
+import 'quizz_finish.dart';
 
 class QuizzGame extends StatefulWidget {
   const QuizzGame({
@@ -31,6 +32,7 @@ class _QuizzGameState extends State<QuizzGame> {
   bool selected = false;
   int? selectedOptionIndex;
   int points = 0;
+
   @override
   void initState() {
     initializeData();
@@ -67,17 +69,29 @@ class _QuizzGameState extends State<QuizzGame> {
     ).show();
   }
 
-  void _handleSingleOptionTap(int index) {
+  void _handleSingleOptionTap() {
     if (!selected) {
       setState(() {
         selected = true;
+        selectedOptionIndex = questionActive;
+      });
+      Future.delayed(const Duration(milliseconds: 500), () {
+        _controller.restart(duration: questionDuration);
       });
 
       if (questionActive == questionsLength - 1) {
-        Navigator.of(context).pushNamed('/quizz/quizz_finish');
+        Future.delayed(const Duration(milliseconds: 500), () {
+          _navigateToQuizzFinish();
+        });
       } else {
-        questionActive += 1;
-        _controller.restart(duration: questionDuration);
+        Future.delayed(const Duration(milliseconds: 500), () {
+          setState(() {
+            questionActive += 1;
+            selected = false;
+            selectedOptionIndex = null;
+          });
+          _controller.start();
+        });
       }
     }
   }
@@ -97,28 +111,44 @@ class _QuizzGameState extends State<QuizzGame> {
     final optionText =
         widget.quizzModel!.questoes[questionActive].alternativas[index];
     final int resposta = widget.quizzModel!.questoes[questionActive].resposta;
+
+    final isSelected = selected && selectedOptionIndex == questionActive;
+    final isCorrect = isSelected && index == resposta;
+
     return Container(
       height: 60,
       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Card(
         elevation: 4,
-        color: ColorsContants.blue,
+        color: isSelected
+            ? (isCorrect ? Colors.green : Colors.red)
+            : ColorsContants.blue,
         child: InkWell(
           onTap: () {
-            _handleSingleOptionTap(index);
-
             _pointsCount(index, resposta, context);
+            _handleSingleOptionTap();
           },
           child: Text(
             optionText,
             maxLines: 3,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: ColorsContants.white,
+            style: TextStyle(
+              color: isSelected ? Colors.white : ColorsContants.white,
               fontWeight: FontWeight.w600,
               fontSize: 22,
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  void _navigateToQuizzFinish() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizzFinish(
+          points: points,
         ),
       ),
     );
@@ -167,9 +197,13 @@ class _QuizzGameState extends State<QuizzGame> {
                     onComplete: () {
                       MessagesHelper.showError('Tempo Esgotado', context);
                       if (questionActive == questionsLength - 1) {
-                        _controller.pause();
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          _navigateToQuizzFinish();
+                        });
                       } else {
-                        questionActive += 1;
+                        setState(() {
+                          questionActive += 1;
+                        });
                         Future.delayed(const Duration(milliseconds: 500), () {
                           _controller.start();
                         });
