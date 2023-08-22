@@ -1,3 +1,4 @@
+import 'package:fast_trivia/src/models/user_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/providers/storage_provider.dart';
@@ -17,6 +18,7 @@ class UserHistory extends StatefulWidget {
 
 class _UserHistoryState extends State<UserHistory> {
   List<QuizzModel> questionarios = [];
+  UserModel? userModel;
   bool loading = true;
 
   @override
@@ -32,10 +34,25 @@ class _UserHistoryState extends State<UserHistory> {
   }
 
   Future<void> requestList() async {
-    List<QuizzModel> quizzList =
-        await StorageProvider.getQuizzFromSharedPreferences();
+    UserModel? userResponses =
+        await StorageProvider.getUserResponsesFromSharedPreferences();
+
+    if (userResponses != null) {
+      List<QuizzModel> quizzList =
+          await StorageProvider.getQuizzFromSharedPreferences();
+      setState(() {
+        questionarios = quizzList;
+        userModel = userResponses;
+
+        print(
+            ' questionarios respondidos ${userModel!.questionariosRespondidos}');
+
+        print(' id do ${userModel!.temasRespondidos.length}');
+      });
+    }
+
     setState(() {
-      questionarios = quizzList;
+      loading = false;
     });
   }
 
@@ -62,51 +79,60 @@ class _UserHistoryState extends State<UserHistory> {
             ? const CustomLoader()
             : Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'Histórico de quizz',
-                          style: TextStyle(
-                            color: ColorsContants.red,
-                            fontSize: 36,
-                            fontWeight: FontWeight.w800,
-                          ),
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        'Histórico de quizz',
+                        style: TextStyle(
+                          color: ColorsContants.red,
+                          fontSize: 36,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
-                      FixedSpacer.vSmallest,
-                      const SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'Escolha um quizz abaixo para conferir o gabarito',
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                            color: ColorsContants.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
+                    ),
+                    FixedSpacer.vSmallest,
+                    const SizedBox(
+                      width: double.infinity,
+                      child: Text(
+                        'Escolha um quizz abaixo para conferir o gabarito',
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          color: ColorsContants.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      FixedSpacer.vSmallest,
-                      QuizzCardPreview(
-                        backgroundColor: ColorsContants.grey,
-                        themeImage: ImageConstants.historyTheme,
-                        iconData: Icons.check_rounded,
-                        rightAnswers: 0,
-                        quizzModel: questionarios[0],
-                      ),
-                      FixedSpacer.vSmaller,
-                      QuizzCardPreview(
-                        quizzModel: questionarios[1],
-                        iconData: Icons.check_rounded,
-                        rightAnswers: 0,
-                        backgroundColor: ColorsContants.grey,
-                        themeImage: ImageConstants.scienceTheme,
-                      ),
-                    ],
-                  ),
+                    ),
+                    FixedSpacer.vSmallest,
+                    if (questionarios.isEmpty) ...[
+                      FixedSpacer.vBiggest,
+                      const Text(
+                        'Nenhum quizz respondido até o momento.',
+                        style: TextStyle(
+                          color: ColorsContants.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      )
+                    ] else
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: userModel!.temasRespondidos.length,
+                          itemBuilder: (context, index) {
+                            return QuizzCardPreview(
+                              backgroundColor: ColorsContants.grey,
+                              themeImage: ImageConstants.historyTheme,
+                              iconData: Icons.check_rounded,
+                              rightAnswers: userModel?.respostasCorretas ?? 0,
+                              quizzModel: questionarios[
+                                  userModel!.temasRespondidos[index]],
+                            );
+                          },
+                        ),
+                      )
+                  ],
                 ),
               ),
       ),
