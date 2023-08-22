@@ -36,12 +36,15 @@ class _QuizzFeedbackState extends State<QuizzFeedback> {
     questionsLength = widget.quizzModel!.questoes.length;
     alternativesLength =
         widget.quizzModel!.questoes[questionActive].alternativas.length;
-    question = widget.quizzModel!.questoes[questionActive].pergunta;
-    print(questionActive);
+    question = widget.quizzModel!.questoes[0].pergunta;
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      question = widget.quizzModel!.questoes[questionActive].pergunta;
+    });
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

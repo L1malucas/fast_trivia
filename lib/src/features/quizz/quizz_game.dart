@@ -25,12 +25,14 @@ class QuizzGame extends StatefulWidget {
 }
 
 class _QuizzGameState extends State<QuizzGame> {
-  bool selected = false;
-  int questionActive = 0;
+  final CountDownController _controller = CountDownController();
+  late String question;
   late int answer;
   late int alternativesLength;
+  bool selected = false;
+  int questionActive = 0;
   int questionsLength = -1;
-  late String question;
+  int questionDuration = 8;
 
   @override
   void initState() {
@@ -44,8 +46,7 @@ class _QuizzGameState extends State<QuizzGame> {
     questionsLength = widget.quizzModel!.questoes.length;
     alternativesLength =
         widget.quizzModel!.questoes[questionActive].alternativas.length;
-    question = widget.quizzModel!.questoes[questionActive].pergunta;
-    print(questionActive);
+    question = widget.quizzModel!.questoes[0].pergunta;
   }
 
   Future<bool> _onWillPop() async {
@@ -74,6 +75,10 @@ class _QuizzGameState extends State<QuizzGame> {
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      question = widget.quizzModel!.questoes[questionActive].pergunta;
+    });
+
     return WillPopScope(
       onWillPop: _onWillPop,
       child: Scaffold(
@@ -99,16 +104,29 @@ class _QuizzGameState extends State<QuizzGame> {
                     ),
                   ),
                   CircularCountDownTimer(
+                    autoStart: true,
+                    controller: _controller,
                     isReverse: true,
                     width: 38,
                     height: 38,
                     textStyle: const TextStyle(
                         color: ColorsContants.white, fontSize: 18),
-                    duration: 8,
+                    duration: questionDuration,
                     fillColor: ColorsContants.red,
                     ringColor: ColorsContants.white,
                     onComplete: () {
                       MessagesHelper.showError('Tempo Esgotado', context);
+                      setState(() {
+                        if (questionActive == questionsLength - 1) {
+                          _controller.pause();
+                        } else {
+                          questionActive += 1;
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            _controller.start();
+                          });
+                          print(question);
+                        }
+                      });
                     },
                   )
                 ],
@@ -136,9 +154,10 @@ class _QuizzGameState extends State<QuizzGame> {
               // contagem das questões
               FixedSpacer.vSmall,
               QuizzText(
-                text: "questão $questionActive de $questionsLength",
+                text: "Questões restantes: ${questionsLength - questionActive}",
                 size: 20,
-                textAlign: TextAlign.start,
+                maxLines: 4,
+                textAlign: TextAlign.center,
               ),
               // título da questão
               FixedSpacer.vSmall,
