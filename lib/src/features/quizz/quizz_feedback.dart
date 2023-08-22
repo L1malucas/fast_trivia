@@ -1,8 +1,10 @@
+import 'package:fast_trivia/src/core/providers/storage_provider.dart';
 import 'package:flutter/material.dart';
 
 import '../../core/ui/constants.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
 import '../../models/quiz_model.dart';
+import '../../models/user_model.dart';
 import 'quizz_text.dart';
 
 class QuizzFeedback extends StatefulWidget {
@@ -23,10 +25,12 @@ class _QuizzFeedbackState extends State<QuizzFeedback> {
   late int alternativesLength;
   int questionsLength = -1;
   late String question;
+  UserModel? userResponses;
 
   @override
   void initState() {
     initializeData();
+    getUserResponses();
     super.initState();
   }
 
@@ -37,6 +41,12 @@ class _QuizzFeedbackState extends State<QuizzFeedback> {
     alternativesLength =
         widget.quizzModel!.questoes[questionActive].alternativas.length;
     question = widget.quizzModel!.questoes[0].pergunta;
+  }
+
+  void getUserResponses() async {
+    userResponses =
+        await StorageProvider.getUserResponsesFromSharedPreferences();
+    setState(() {});
   }
 
   @override
@@ -136,8 +146,11 @@ class _QuizzFeedbackState extends State<QuizzFeedback> {
                 elevation: 4,
                 color: ColorsContants.red,
                 child: Text(
-                  widget.quizzModel!.questoes[questionActive]
-                      .alternativas[answer],
+                  userResponses != null
+                      ? widget.quizzModel!.questoes[questionActive]
+                              .alternativas[
+                          userResponses!.respostasDoUsuario[questionActive]]
+                      : '',
                   maxLines: 3,
                   textAlign: TextAlign.center,
                   style: const TextStyle(

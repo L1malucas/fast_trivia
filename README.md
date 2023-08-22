@@ -13,7 +13,7 @@ O FastTrivia é um projeto utilizado para teste técnico para vaga de desenvolve
 ## Requisitos não atendidos
 
 - Tela de histórico não exibe todos os quizz jogados, apenas o último;
-- Tela de conferência não exibe respostas escolhidas pelo usuarios
+
 
 ## Versões Utilizadas
 
