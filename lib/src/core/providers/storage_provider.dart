@@ -22,4 +22,9 @@ class StorageProvider {
       return [];
     }
   }
+
+  static Future<void> clearQuizzDataFromSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('questionarios');
+  }
 }

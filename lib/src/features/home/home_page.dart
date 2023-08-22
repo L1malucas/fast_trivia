@@ -43,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
+        await StorageProvider.clearQuizzDataFromSharedPreferences();
         SystemNavigator.pop();
         return false;
       },
