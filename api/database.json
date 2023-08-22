@@ -12,9 +12,26 @@
         },
         {
           "questao_id": 1,
-          "pergunta": "Qual é o animal símbolo do Brasil devido a sua imponente beleza e ameaça de extinção?",
-          "resposta": 1,
+          "pergunta": "Qual é o animal símbolo do Brasil?",
+          "resposta": 3,
           "alternativas": ["Lobo-guará", "Onça-pintada", "Capivara", "Tucano"]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual é o maior rio do mundo?",
+          "resposta": 0,
+          "alternativas": [
+            "Rio Amazonas",
+            "Rio Nilo",
+            "Rio Yangtzé",
+            "Rio Mississipi"
+          ]
+        },
+        {
+          "questao_id": 3,
+          "pergunta": "Em qual bioma se encontra o Pantanal brasileiro?",
+          "resposta": 2,
+          "alternativas": ["Caatinga", "Mata Atlântica", "Cerrado", "Amazônia"]
         }
       ]
     },
@@ -30,14 +47,31 @@
         },
         {
           "questao_id": 1,
-          "pergunta": "Qual é o famoso mercado em Salvador conhecido por sua variedade de produtos locais e regionais?",
-          "resposta": 3,
+          "pergunta": "Qual é o famoso mercado em Salvador?",
+          "resposta": 0,
           "alternativas": [
             "Mercado Modelo",
             "Mercado Municipal",
             "Mercado do Porto",
             "Mercado Central"
           ]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual é a igreja mais famosa de Salvador?",
+          "resposta": 1,
+          "alternativas": [
+            "Catedral de Salvador",
+            "Igreja do Senhor do Bonfim",
+            "Igreja de São Francisco",
+            "Igreja de São Lázaro"
+          ]
+        },
+        {
+          "questao_id": 3,
+          "pergunta": "Qual é a famosa festa de rua realizada em Salvador?",
+          "resposta": 0,
+          "alternativas": ["Carnaval", "São João", "Natal", "Réveillon"]
         }
       ]
     },
@@ -48,18 +82,40 @@
         {
           "questao_id": 0,
           "pergunta": "Em que ano o Brasil foi descoberto pelos portugueses?",
-          "resposta": 2,
+          "resposta": 1,
           "alternativas": ["1492", "1500", "1521", "1557"]
         },
         {
           "questao_id": 1,
-          "pergunta": "Qual imperador assinou a Lei Áurea, abolindo a escravidão no Brasil?",
-          "resposta": 4,
+          "pergunta": "Quem assinou a Lei Áurea, abolindo a escravidão no Brasil?",
+          "resposta": 1,
           "alternativas": [
             "Dom João VI",
             "Princesa Isabel",
             "Dom Pedro I",
             "Dom Pedro II"
+          ]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual foi o primeiro presidente do Brasil?",
+          "resposta": 2,
+          "alternativas": [
+            "Getúlio Vargas",
+            "Fernando Henrique Cardoso",
+            "Deodoro da Fonseca",
+            "Juscelino Kubitschek"
+          ]
+        },
+        {
+          "questao_id": 3,
+          "pergunta": "Qual foi a Revolta que ocorreu no Brasil em 1835?",
+          "resposta": 0,
+          "alternativas": [
+            "Revolta dos Malês",
+            "Inconfidência Mineira",
+            "Guerra dos Farrapos",
+            "Sabinada"
           ]
         }
       ]
@@ -71,14 +127,36 @@
         {
           "questao_id": 0,
           "pergunta": "Qual é o planeta mais próximo do Sol?",
-          "resposta": 2,
+          "resposta": 1,
           "alternativas": ["Vênus", "Mercúrio", "Marte", "Júpiter"]
         },
         {
           "questao_id": 1,
           "pergunta": "Qual é a unidade básica da vida?",
-          "resposta": 1,
+          "resposta": 0,
           "alternativas": ["Célula", "Átomo", "Molécula", "Proteína"]
+        },
+        {
+          "questao_id": 2,
+          "pergunta": "Qual é o gás mais abundante na atmosfera da Terra?",
+          "resposta": 1,
+          "alternativas": [
+            "Nitrogênio",
+            "Oxigênio",
+            "Dióxido de Carbono",
+            "Hidrogênio"
+          ]
+        },
+        {
+          "questao_id": 3,
+          "pergunta": "Qual é o processo pelo qual as plantas fabricam seu próprio alimento?",
+          "resposta": 0,
+          "alternativas": [
+            "Fotossíntese",
+            "Respiração",
+            "Transpiração",
+            "Digestão"
+          ]
         }
       ]
     }
