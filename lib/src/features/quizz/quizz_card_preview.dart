@@ -8,16 +8,16 @@ class QuizzCardPreview extends StatelessWidget {
   const QuizzCardPreview({
     Key? key,
     required this.themeImage,
-    this.iconData,
-    this.backgroundColor,
-    this.rightAnswers,
+    required this.iconData,
     required this.quizzModel,
+    this.rightAnswers,
+    this.backgroundColor,
   }) : super(key: key);
 
   final QuizzModel quizzModel;
 
   final String themeImage;
-  final IconData? iconData;
+  final IconData iconData;
   final Color? backgroundColor;
   final int? rightAnswers;
 
@@ -69,24 +69,28 @@ class QuizzCardPreview extends StatelessWidget {
                   ),
                 ),
                 FixedSpacer.vSmaller,
-                Text(
-                  '${quizzModel.questoes.length} Questões',
-                  style: const TextStyle(
-                    color: ColorsContants.white,
-                    fontSize: 16,
-                  ),
-                ),
-                FixedSpacer.vSmallest,
-                Visibility(
-                  visible: rightAnswers != null,
-                  child: Text(
-                    '${quizzModel.questoes.length} Acertos',
-                    style: const TextStyle(
-                      color: ColorsContants.white,
-                      fontSize: 14,
+                Row(
+                  children: [
+                    Text(
+                      '${quizzModel.questoes.length} Questões /',
+                      style: const TextStyle(
+                        color: ColorsContants.white,
+                        fontSize: 16,
+                      ),
                     ),
-                  ),
+                    Visibility(
+                      visible: rightAnswers != null,
+                      child: Text(
+                        ' ${quizzModel.questoes.length} Acertos',
+                        style: const TextStyle(
+                          color: ColorsContants.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
+                FixedSpacer.vSmaller,
                 Icon(
                   size: 15,
                   iconData,

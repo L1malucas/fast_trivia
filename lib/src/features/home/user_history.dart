@@ -86,12 +86,14 @@ class _UserHistoryState extends State<UserHistory> {
                 QuizzCardPreview(
                   backgroundColor: ColorsContants.grey,
                   themeImage: ImageConstants.historyTheme,
+                  iconData: Icons.check_rounded,
                   rightAnswers: 0,
                   quizzModel: questionarios[0],
                 ),
                 FixedSpacer.vSmaller,
                 QuizzCardPreview(
                   quizzModel: questionarios[1],
+                  iconData: Icons.check_rounded,
                   rightAnswers: 0,
                   backgroundColor: ColorsContants.grey,
                   themeImage: ImageConstants.scienceTheme,
