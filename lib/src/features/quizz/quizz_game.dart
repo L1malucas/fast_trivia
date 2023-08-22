@@ -37,6 +37,7 @@ class _QuizzGameState extends State<QuizzGame> {
   int? selectedOptionIndex;
   int points = 0;
   int currentThemeId = -1;
+  List<int> userChoice = [];
   @override
   void initState() {
     initializeData();
@@ -130,6 +131,7 @@ class _QuizzGameState extends State<QuizzGame> {
             : ColorsContants.blue,
         child: InkWell(
           onTap: () {
+            userChoice.add(index);
             _pointsCount(index, resposta, context);
             _handleSingleOptionTap();
           },
@@ -151,6 +153,7 @@ class _QuizzGameState extends State<QuizzGame> {
   void _navigateToQuizzFinish() async {
     await StorageProvider.saveUserResponsesToSharedPreferences(
       UserModel(
+        respostasDoUsuario: userChoice,
         temasRespondidos: [currentThemeId],
         respostasCorretas: points,
         idUsuario: 1,
