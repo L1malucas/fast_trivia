@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fast_trivia/src/core/ui/constants.dart';
 import 'package:fast_trivia/src/core/ui/widget/messages_helpers.dart';
@@ -5,20 +6,18 @@ import 'package:fast_trivia/src/core/ui/widget/alert.dart';
 import 'package:fast_trivia/src/core/ui/widget/fixed_spacer.dart';
 import 'package:fast_trivia/src/features/home/home_page.dart';
 import 'package:fast_trivia/src/features/quizz/quizz_text.dart';
-import 'package:flutter/material.dart';
 
 import '../../models/quiz_model.dart';
 
-// ignore: must_be_immutable
 class QuizzGame extends StatefulWidget {
-  QuizzGame({
-    super.key,
+  const QuizzGame({
+    Key? key,
     this.themeImage,
     this.quizzModel,
-  });
+  }) : super(key: key);
 
-  String? themeImage;
-  QuizzModel? quizzModel;
+  final String? themeImage;
+  final QuizzModel? quizzModel;
 
   @override
   State<QuizzGame> createState() => _QuizzGameState();
@@ -26,14 +25,12 @@ class QuizzGame extends StatefulWidget {
 
 class _QuizzGameState extends State<QuizzGame> {
   final CountDownController _controller = CountDownController();
-  late String question;
-  late int answer;
-  late int alternativesLength;
-  bool selected = false;
   int questionActive = 0;
   int questionsLength = -1;
   int questionDuration = 8;
-
+  bool selected = false;
+  int? selectedOptionIndex;
+  int points = 0;
   @override
   void initState() {
     initializeData();
@@ -42,11 +39,8 @@ class _QuizzGameState extends State<QuizzGame> {
 
   void initializeData() {
     questionActive = widget.quizzModel!.questoes[0].questaoId;
-    answer = widget.quizzModel!.questoes[questionActive].resposta;
     questionsLength = widget.quizzModel!.questoes.length;
-    alternativesLength =
-        widget.quizzModel!.questoes[questionActive].alternativas.length;
-    question = widget.quizzModel!.questoes[0].pergunta;
+    _controller.start();
   }
 
   Future<bool> _onWillPop() async {
@@ -56,28 +50,83 @@ class _QuizzGameState extends State<QuizzGame> {
 
   void _showExitAlert(BuildContext context) {
     Alert(
-            onConfirmPressed: () async {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
-                (route) => false,
-              );
-              return false;
-            },
-            onCancelPressed: () {},
-            title: 'Sair do quizz',
-            context: context,
-            type: AlertType.yesNo,
-            message:
-                'Ao sair todos dados serão perdidos \n Tem certeza que deseja sair?')
-        .show();
+      onConfirmPressed: () async {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+          (route) => false,
+        );
+        return false;
+      },
+      onCancelPressed: () {},
+      title: 'Sair do quizz',
+      context: context,
+      type: AlertType.yesNo,
+      message:
+          'Ao sair todos dados serão perdidos \n Tem certeza que deseja sair?',
+    ).show();
+  }
+
+  void _handleSingleOptionTap(int index) {
+    if (!selected) {
+      setState(() {
+        selected = true;
+      });
+
+      if (questionActive == questionsLength - 1) {
+        Navigator.of(context).pushNamed('/quizz/quizz_finish');
+      } else {
+        questionActive += 1;
+        _controller.restart(duration: questionDuration);
+      }
+    }
+  }
+
+  void _pointsCount(int userChoice, int resposta, BuildContext context) {
+    if (userChoice == resposta) {
+      points += 1;
+      MessagesHelper.showSuccess('Certa resposta', context);
+      debugPrint('$points');
+      debugPrint('$resposta');
+    } else {
+      MessagesHelper.showError('Resposta Errada', context);
+    }
+  }
+
+  Widget _buildOptionItem(int index) {
+    final optionText =
+        widget.quizzModel!.questoes[questionActive].alternativas[index];
+    final int resposta = widget.quizzModel!.questoes[questionActive].resposta;
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+      child: Card(
+        elevation: 4,
+        color: ColorsContants.blue,
+        child: InkWell(
+          onTap: () {
+            _handleSingleOptionTap(index);
+
+            _pointsCount(index, resposta, context);
+          },
+          child: Text(
+            optionText,
+            maxLines: 3,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              color: ColorsContants.white,
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      question = widget.quizzModel!.questoes[questionActive].pergunta;
-    });
+    final question = widget.quizzModel!.questoes[questionActive].pergunta;
 
     return WillPopScope(
       onWillPop: _onWillPop,
@@ -89,7 +138,6 @@ class _QuizzGameState extends State<QuizzGame> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               FixedSpacer.vNormal,
-              // countdown e saída do quizz
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -98,8 +146,8 @@ class _QuizzGameState extends State<QuizzGame> {
                       _showExitAlert(context);
                     },
                     icon: const Icon(
-                      size: 38,
                       Icons.close_rounded,
+                      size: 38,
                       color: ColorsContants.white,
                     ),
                   ),
@@ -110,48 +158,42 @@ class _QuizzGameState extends State<QuizzGame> {
                     width: 38,
                     height: 38,
                     textStyle: const TextStyle(
-                        color: ColorsContants.white, fontSize: 18),
+                      color: ColorsContants.white,
+                      fontSize: 18,
+                    ),
                     duration: questionDuration,
                     fillColor: ColorsContants.red,
                     ringColor: ColorsContants.white,
                     onComplete: () {
                       MessagesHelper.showError('Tempo Esgotado', context);
-                      setState(() {
-                        if (questionActive == questionsLength - 1) {
-                          _controller.pause();
-                        } else {
-                          questionActive += 1;
-                          Future.delayed(const Duration(milliseconds: 500), () {
-                            _controller.start();
-                          });
-                          print(question);
-                        }
-                      });
+                      if (questionActive == questionsLength - 1) {
+                        _controller.pause();
+                      } else {
+                        questionActive += 1;
+                        Future.delayed(const Duration(milliseconds: 500), () {
+                          _controller.start();
+                        });
+                      }
                     },
-                  )
+                  ),
                 ],
               ),
-              // imagem do tema
               FixedSpacer.vSmall,
               SizedBox(
                 width: double.infinity,
                 height: 180,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      12.0), // Adjust the radius as needed
+                  borderRadius: BorderRadius.circular(12.0),
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(
-                          widget.themeImage!,
-                        ),
+                        image: AssetImage(widget.themeImage!),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
               ),
-              // contagem das questões
               FixedSpacer.vSmall,
               QuizzText(
                 text: "Questões restantes: ${questionsLength - questionActive}",
@@ -159,52 +201,19 @@ class _QuizzGameState extends State<QuizzGame> {
                 maxLines: 4,
                 textAlign: TextAlign.center,
               ),
-              // título da questão
               FixedSpacer.vSmall,
               QuizzText(
-                  fontWeight: FontWeight.w600,
-                  text: question.toUpperCase(),
-                  size: 28),
-              // alternativas
+                fontWeight: FontWeight.w600,
+                text: question.toUpperCase(),
+                size: 28,
+              ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: alternativesLength,
+                  itemCount: widget
+                      .quizzModel!.questoes[questionActive].alternativas.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return Container(
-                      height: 60,
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: Card(
-                        elevation: 4,
-                        // tudo branco, vira verde quando clickado
-                        color: selected
-                            ? ColorsContants.blue
-                            : ColorsContants.white,
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              selected = !selected;
-                              print(selected);
-                              Navigator.of(context)
-                                  .pushNamed('/quizz/quizz_finish');
-                            });
-                          },
-                          child: Text(
-                            widget.quizzModel!.questoes[questionActive]
-                                .alternativas[index],
-                            maxLines: 3,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: selected
-                                  ? ColorsContants.white
-                                  : ColorsContants.brown,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 22,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
+                    return _buildOptionItem(index);
                   },
                 ),
               ),
