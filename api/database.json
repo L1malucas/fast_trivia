@@ -1,7 +1,7 @@
 {
   "questionario": [
     {
-      "id_tema": 1,
+      "id_tema": 0,
       "tema": "Natureza Brasileira",
       "questoes": [
         {
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "id_tema": 2,
+      "id_tema": 1,
       "tema": "Cidade de Salvador",
       "questoes": [
         {
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "id_tema": 3,
+      "id_tema": 2,
       "tema": "História do Brasil",
       "questoes": [
         {
