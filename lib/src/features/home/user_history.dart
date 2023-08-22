@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/providers/storage_provider.dart';
 import '../../core/ui/constants.dart';
+import '../../core/ui/widget/custom_loader.dart';
 import '../../core/ui/widget/fixed_spacer.dart';
 import '../../models/quiz_model.dart';
 import '../quizz/quizz_card_preview.dart';
@@ -16,13 +17,17 @@ class UserHistory extends StatefulWidget {
 
 class _UserHistoryState extends State<UserHistory> {
   List<QuizzModel> questionarios = [];
+  bool loading = true;
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      requestList();
+      await requestList();
+      setState(() {
+        loading = false;
+      });
     });
   }
 
@@ -53,55 +58,57 @@ class _UserHistoryState extends State<UserHistory> {
                   Navigator.of(context).pushReplacementNamed('/home/home');
                 })),
         backgroundColor: ColorsContants.white,
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'Histórico de quizz',
-                    style: TextStyle(
-                      color: ColorsContants.red,
-                      fontSize: 36,
-                      fontWeight: FontWeight.w800,
-                    ),
+        body: loading
+            ? const CustomLoader()
+            : Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          'Histórico de quizz',
+                          style: TextStyle(
+                            color: ColorsContants.red,
+                            fontSize: 36,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                      FixedSpacer.vSmallest,
+                      const SizedBox(
+                        width: double.infinity,
+                        child: Text(
+                          'Escolha um quizz abaixo para conferir o gabarito',
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            color: ColorsContants.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      FixedSpacer.vSmallest,
+                      QuizzCardPreview(
+                        backgroundColor: ColorsContants.grey,
+                        themeImage: ImageConstants.historyTheme,
+                        iconData: Icons.check_rounded,
+                        rightAnswers: 0,
+                        quizzModel: questionarios[0],
+                      ),
+                      FixedSpacer.vSmaller,
+                      QuizzCardPreview(
+                        quizzModel: questionarios[1],
+                        iconData: Icons.check_rounded,
+                        rightAnswers: 0,
+                        backgroundColor: ColorsContants.grey,
+                        themeImage: ImageConstants.scienceTheme,
+                      ),
+                    ],
                   ),
                 ),
-                FixedSpacer.vSmallest,
-                const SizedBox(
-                  width: double.infinity,
-                  child: Text(
-                    'Escolha um quizz abaixo para conferir o gabarito',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      color: ColorsContants.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-                FixedSpacer.vSmallest,
-                QuizzCardPreview(
-                  backgroundColor: ColorsContants.grey,
-                  themeImage: ImageConstants.historyTheme,
-                  iconData: Icons.check_rounded,
-                  rightAnswers: 0,
-                  quizzModel: questionarios[0],
-                ),
-                FixedSpacer.vSmaller,
-                QuizzCardPreview(
-                  quizzModel: questionarios[1],
-                  iconData: Icons.check_rounded,
-                  rightAnswers: 0,
-                  backgroundColor: ColorsContants.grey,
-                  themeImage: ImageConstants.scienceTheme,
-                ),
-              ],
-            ),
-          ),
-        ),
+              ),
       ),
     );
   }
