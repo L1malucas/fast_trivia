@@ -147,7 +147,7 @@ class _QuizzGameState extends State<QuizzGame> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => QuizzFinish(
+        builder: (context) => QuizzFinish(questionsLength: questionsLength,
           points: points,
         ),
       ),

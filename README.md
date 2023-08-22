@@ -43,6 +43,6 @@ O projeto possui a API e o banco de dados hospedados no mockados. Para utilizaç
    ```      
 ### Observações
 
-1. Foi usado o **Shared Preferences** para armazenar os dados da request, permitindo acessos posteriores sem internet.
+1. Foi usado o **Shared Preferences** para armazenar os dados da request, realizando a requisição ao iniciar a aplicação do modelo de questionário, permitindo acessos posteriores sem internet.
 2. Utilizei a fonte **Poppins** e images de licença livre.
 3. Os widgets de **alerta** e **fixed spacer** foram construídos por mim e usados de forma recorrente em meus projetos.

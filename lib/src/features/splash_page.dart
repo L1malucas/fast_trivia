@@ -1,10 +1,11 @@
-import 'package:fast_trivia/src/core/exceptions/request_exceptions.dart';
 import 'package:fast_trivia/src/core/ui/constants.dart';
 import 'package:fast_trivia/src/features/intro/intro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fast_trivia/src/core/providers/storage_provider.dart';
 import 'package:fast_trivia/src/models/quiz_model.dart';
+import 'package:flutter/services.dart';
 import '../core/Services/rest_client.dart';
+import '../core/ui/widget/messages_helpers.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -20,6 +21,7 @@ class _SplashPageState extends State<SplashPage> {
   double get _logoAnimationHeight => 120 * _scale;
 
   List<QuizzModel> questionarios = [];
+  bool shouldProceed = true;
 
   @override
   void initState() {
@@ -39,9 +41,14 @@ class _SplashPageState extends State<SplashPage> {
       await StorageProvider.saveQuizzToSharedPreferences(fetchedQuestionarios);
       setState(() {
         questionarios = fetchedQuestionarios;
+        shouldProceed = true;
       });
     } catch (e) {
-      RequestExceptions(message: e.toString());
+      shouldProceed = false;
+      MessagesHelper.showError(
+          'Servidor fora do ar\nAplicação será encerrada!', context);
+      await Future.delayed(const Duration(seconds: 3));
+      SystemNavigator.pop();
     }
   }
 
@@ -60,7 +67,8 @@ class _SplashPageState extends State<SplashPage> {
         child: Center(
           child: AnimatedOpacity(
             onEnd: () {
-              Navigator.of(context).pushAndRemoveUntil(
+              if (shouldProceed) {
+                Navigator.of(context).pushAndRemoveUntil(
                   PageRouteBuilder(
                     settings: const RouteSettings(name: '/intro'),
                     pageBuilder: (context, animation, secondaryAnimation) {
@@ -73,7 +81,9 @@ class _SplashPageState extends State<SplashPage> {
                       );
                     },
                   ),
-                  (route) => false);
+                  (route) => false,
+                );
+              }
             },
             curve: Curves.easeIn,
             opacity: _animationOpacityLogo,
