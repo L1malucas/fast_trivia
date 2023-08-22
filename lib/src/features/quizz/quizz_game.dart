@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:fast_trivia/src/core/ui/constants.dart';
@@ -7,7 +9,9 @@ import 'package:fast_trivia/src/core/ui/widget/fixed_spacer.dart';
 import 'package:fast_trivia/src/features/home/home_page.dart';
 import 'package:fast_trivia/src/features/quizz/quizz_text.dart';
 
+import '../../core/providers/storage_provider.dart';
 import '../../models/quiz_model.dart';
+import '../../models/user_model.dart';
 import 'quizz_finish.dart';
 
 class QuizzGame extends StatefulWidget {
@@ -32,7 +36,7 @@ class _QuizzGameState extends State<QuizzGame> {
   bool selected = false;
   int? selectedOptionIndex;
   int points = 0;
-
+  int currentThemeId = -1;
   @override
   void initState() {
     initializeData();
@@ -42,6 +46,7 @@ class _QuizzGameState extends State<QuizzGame> {
   void initializeData() {
     questionActive = widget.quizzModel!.questoes[0].questaoId;
     questionsLength = widget.quizzModel!.questoes.length;
+    currentThemeId = widget.quizzModel!.idTema;
     _controller.start();
   }
 
@@ -143,15 +148,23 @@ class _QuizzGameState extends State<QuizzGame> {
     );
   }
 
-  void _navigateToQuizzFinish() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => QuizzFinish(questionsLength: questionsLength,
-          points: points,
-        ),
+  void _navigateToQuizzFinish() async {
+    await StorageProvider.saveUserResponsesToSharedPreferences(
+      UserModel(
+        temasRespondidos: [currentThemeId],
+        respostasCorretas: points,
+        idUsuario: 1,
+        questionariosRespondidos: [currentThemeId],
       ),
     );
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => QuizzFinish(
+            questionsLength: questionsLength,
+            points: points,
+          ),
+        ));
   }
 
   @override

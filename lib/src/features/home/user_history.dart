@@ -44,8 +44,7 @@ class _UserHistoryState extends State<UserHistory> {
         questionarios = quizzList;
         userModel = userResponses;
 
-        print(
-            ' questionarios respondidos ${userModel!.questionariosRespondidos}');
+        print('  respondidos ${userModel!.questionariosRespondidos.length}');
 
         print(' id do ${userModel!.temasRespondidos.length}');
       });
@@ -121,17 +120,20 @@ class _UserHistoryState extends State<UserHistory> {
                         child: ListView.builder(
                           itemCount: userModel!.temasRespondidos.length,
                           itemBuilder: (context, index) {
+                            final temaRespondidoId =
+                                userModel!.temasRespondidos[index];
+                            final quizzModel = questionarios[temaRespondidoId];
+
                             return QuizzCardPreview(
                               backgroundColor: ColorsContants.grey,
                               themeImage: ImageConstants.historyTheme,
                               iconData: Icons.check_rounded,
-                              rightAnswers: userModel?.respostasCorretas ?? 0,
-                              quizzModel: questionarios[
-                                  userModel!.temasRespondidos[index]],
+                              rightAnswers: userModel!.respostasCorretas,
+                              quizzModel: quizzModel,
                             );
                           },
                         ),
-                      )
+                      ),
                   ],
                 ),
               ),

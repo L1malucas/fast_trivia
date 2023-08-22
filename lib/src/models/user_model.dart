@@ -1,7 +1,7 @@
 class UserModel {
   final int idUsuario;
   final List<int> questionariosRespondidos;
-  final List<int> temasRespondidos; 
+  final List<int> temasRespondidos;
   final int respostasCorretas;
 
   UserModel({
@@ -16,8 +16,7 @@ class UserModel {
       idUsuario: json['id_usuario'],
       questionariosRespondidos:
           List<int>.from(json['questionarios_respondidos']),
-      temasRespondidos:
-          List<int>.from(json['temas_respondidos']), 
+      temasRespondidos: List<int>.from(json['temas_respondidos']),
       respostasCorretas: json['respostas_corretas'],
     );
   }
@@ -26,7 +25,7 @@ class UserModel {
     return {
       'id_usuario': idUsuario,
       'questionarios_respondidos': questionariosRespondidos,
-      'temas_respondidos': temasRespondidos, 
+      'temas_respondidos': temasRespondidos,
       'respostas_corretas': respostasCorretas,
     };
   }

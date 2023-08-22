@@ -97,7 +97,7 @@ class QuizzCardPreview extends StatelessWidget {
                     Visibility(
                       visible: rightAnswers != null,
                       child: Text(
-                        ' / ${quizzModel.questoes.length} Acertos',
+                        ' / $rightAnswers Acertos',
                         style: const TextStyle(
                           color: ColorsContants.white,
                           fontSize: 14,
