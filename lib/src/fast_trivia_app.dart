@@ -29,7 +29,8 @@ class FastTriviaApp extends StatelessWidget {
             '/home/home': (_) => const HomePage(),
             '/home/user_history': (_) => const UserHistory(),
             '/quizz/quizz_game': (_) => const QuizzGame(),
-            '/quizz/quizz_finish': (_) => const QuizzFinish(points: 0),
+            '/quizz/quizz_finish': (_) =>
+                const QuizzFinish(points: 0, questionsLength: 0),
             '/quizz/quizz_feedback': (_) => const QuizzFeedback()
           },
         );
