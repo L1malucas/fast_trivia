@@ -1,10 +1,48 @@
-GET    /questionario/1                           -> Recuperar o questionário com ID 1
-GET    /questionario/1/tema                      -> Recuperar o tema do questionário com ID 1
-GET    /questionario/1/questoes                  -> Recuperar todas as questões do questionário com ID 1
-GET    /questionario/1/questoes/1                -> Recuperar a questão com ID 1 do questionário com ID 1
+# Fast Trivia - README
 
-modo adm
-POST   /questionario/1/questoes                  -> Adicionar uma nova questão ao questionário com ID 1
-PUT    /questionario/1/questoes/1                -> Editar a questão com ID 1 do questionário com ID 1
-PATCH  /questionario/1/questoes/1                -> Editar parcialmente a questão com ID 1 do questionário com ID 1
-DELETE /questionario/1/questoes/1                -> Deletar a questão com ID 1 do questionário com ID 1
+O FastTrivia é um projeto utilizado para teste técnico para vaga de desenvolvedor flutter na checkmob, contendo uma aAplicação em que o usuário receba um questionário, com uma ou mais perguntas, tendo alternativas, e possa responder de acordo, conhecimentos, ao final ser retornado a sua pontuação total.
+
+## Requisitos dos Testes
+
+- Ao selecionar a opção de responder um novo questionário, a aplicação deverá receber o modelo de questionário a ser respondido via uma requisição mock HTTP;
+- Permitir que o usuário responda questionários com questões do tipo seleção única;
+- Exibir a lista de questionários respondidos pelo usuário;
+- Permitir que o usuário selecione um questionário respondido anteriormente e exibir quais foram as respostas informadas.
+- Inclua instruções sobre o projeto no readme.md do repositório, tais como versão do Flutter e outras ferramentas utilizadas.
+
+## Versões Utilizadas
+  - SDK: 33
+  - Flutter: 3.10.5 
+  - Dart: 3.0.5 
+  - DevTools: 2.23.1
+  - Emulador: Redmi Note 7
+
+- **Banco de Dados**
+  - json_rest_server: ^1.5.10
+
+## Passos Iniciais
+
+Antes de iniciar, verifique se você possui as mesmas versões utilizadas no projeto.
+
+### Configurando API e Banco
+
+O projeto possui a API e o banco de dados hospedados no mockados. Para utilização:
+
+1. Ative o Json Rest Server pelo pub: 
+   ```
+   dart pub global activate json_rest_server
+   ```   
+2. Navegue até a pastas **/api** que se encontra no projeto
+3. Execute o comando em um terminal, de preferência powershell:
+   ```
+   json_rest_server run
+   ```   
+   ou
+   ```
+   jrs run
+   ```      
+### Observações
+
+1. Foi usado o **Shared Preferences** para armazenar os dados da request, permitindo acessos posteriores sem internet.
+2. Utilizei a fonte **Poppins** e images de licença livre.
+3. Os widgets de **alerta** e **fixed spacer** foram construídos por mim e usados de forma recorrente em meus projetos.

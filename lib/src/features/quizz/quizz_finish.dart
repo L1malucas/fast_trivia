@@ -6,7 +6,9 @@ import '../../core/ui/widget/fixed_spacer.dart';
 import 'quizz_text.dart';
 
 class QuizzFinish extends StatefulWidget {
-  const QuizzFinish({super.key});
+  const QuizzFinish({super.key, required this.points});
+
+  final int points;
 
   @override
   State<QuizzFinish> createState() => _QuizzFinishState();
@@ -74,11 +76,13 @@ class _QuizzFinishState extends State<QuizzFinish> {
                 height: 180,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12.0),
-                  child: const DecoratedBox(
+                  child: DecoratedBox(
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage(
-                          ImageConstants.congratsImage,
+                          widget.points > 5
+                              ? ImageConstants.congratsImage
+                              : ImageConstants.gameOverImage,
                         ),
                         fit: BoxFit.cover,
                       ),
@@ -87,12 +91,14 @@ class _QuizzFinishState extends State<QuizzFinish> {
                 ),
               ),
               FixedSpacer.vBiggest,
-              const QuizzText(
-                text: "Você acertou 2 de 10!!",
+              QuizzText(
+                text: widget.points > 5
+                    ? "Você acertou ${widget.points} de 10!!"
+                    : "Você acertou ${widget.points} de 10!!\nTente outros questionários",
                 size: 32,
                 fontWeight: FontWeight.w500,
               ),
-              FixedSpacer.vBiggest,
+              FixedSpacer.vBig,
               const QuizzText(
                 maxLines: 10,
                 text:

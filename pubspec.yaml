@@ -1,5 +1,5 @@
 name: fast_trivia
-description: A new Flutter project.
+description: O FastTrivia é um projeto utilizado para teste técnico para vaga de desenvolvedor flutter na checkmob, contendo uma aAplicação em que o usuário receba um questionário, com uma ou mais perguntas, tendo alternativas, e possa responder de acordo, conhecimentos, ao final ser retornado a sua pontuação total.
 publish_to: "none"
 version: 0.1.0
 
