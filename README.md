@@ -29,7 +29,7 @@ O FastTrivia é um projeto utilizado para teste técnico para vaga de desenvolve
 ## Passos Iniciais
 
 - Antes de iniciar, verifique se você possui as mesmas versões utilizadas no projeto.
-- Altere seu ip local dentro do arquivo **/lib/core/ui/constants.dart** 
+- Altere seu ip local dentro do arquivo **/lib/src/core/ui/constants.dart** 
 
 ### Configurando API e Banco
 
